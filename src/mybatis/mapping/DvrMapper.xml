@@ -604,7 +604,18 @@
 		select *from all
 	</select>
 
+	<select id="selectAllByPrimaryKey" parameterType="java.lang.Integer" resultMap="DetailedResultMap">
+		select
+		a.contact,a.contact_phone,a.address,a.cust_mgr,a.cust_mgr_phone,a.lat,a.lng,a.`name`,a.`owner`,a.`status`,a.zone,b.* 
+		from cust a,dvr b
+		<where>
+			a.id=b.cust_id
+			and 
+			b.id= #{id,jdbcType=INTEGER}
+		</where>
 
+
+	</select>
 	<select id="selectByAll" resultMap="DetailedResultMap">
 		select
 		a.contact,a.contact_phone,a.address,a.cust_mgr,a.cust_mgr_phone,a.lat,a.lng,a.`name`,a.`owner`,a.`status`,a.zone,b.* 

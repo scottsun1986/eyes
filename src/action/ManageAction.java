@@ -322,7 +322,7 @@ public class ManageAction extends ActionSupport{
 
 	public String gotoDvrDetailPage(){
 		if(id!=null&&!id.trim().equals("")){
-		Dvr currentDvr=dvrMapper.selectByPrimaryKey(new Integer(id));
+		Dvr currentDvr=dvrMapper.selectAllByPrimaryKey(new Integer(id));
 	 
 		HttpServletRequest request = ServletActionContext.getRequest();
 	 
@@ -335,6 +335,61 @@ public class ManageAction extends ActionSupport{
 		return "success";}
 		return "";
 	}
+	
+	public String gotoCustDetailPage(){
+		if(id!=null&&!id.trim().equals("")){
+		Cust currentCust=custMapper.selectByPrimaryKey(new Integer(id));
+	 
+		HttpServletRequest request = ServletActionContext.getRequest();
+	 
+		request.setAttribute("currentCust", currentCust);
+	//	if(searchKey!=null)
+		//request.setAttribute("searchKey", searchKey);
+	 
+		ServletActionContext.setRequest(ServletActionContext.getRequest());
+	 
+		return "success";}
+		return "";
+	}
+	private Cust currentCust;
+	public Cust getCurrentCust() {
+		return currentCust;
+	}
+
+	public void setCurrentCust(Cust currentCust) {
+		this.currentCust = currentCust;
+	}
+
+	public String gotoCustModifyPage(){
+		if(id!=null&&!id.trim().equals("")){
+		currentCust=custMapper.selectByPrimaryKey(new Integer(id));
+	 
+		HttpServletRequest request = ServletActionContext.getRequest();
+	 
+		request.setAttribute("currentCust", currentCust);
+	//	if(searchKey!=null)
+		//request.setAttribute("searchKey", searchKey);
+	 
+		ServletActionContext.setRequest(ServletActionContext.getRequest());
+	 
+		return "success";}
+		return "";
+	}
+	public String gotoDvrModifyPage(){
+		if(id!=null&&!id.trim().equals("")){
+		currentDvr=dvrMapper.selectAllByPrimaryKey(new Integer(id));
+ 		HttpServletRequest request = ServletActionContext.getRequest();
+	
+		request.setAttribute("currentDvr", currentDvr);
+	//	if(searchKey!=null)
+		//request.setAttribute("searchKey", searchKey);
+	 
+		ServletActionContext.setRequest(ServletActionContext.getRequest());
+	 
+		return "success";}
+		return "";
+	}
+	
 	public String goCustMainPage(){
 		return "success";
 	}
@@ -403,7 +458,31 @@ public class ManageAction extends ActionSupport{
 		return "success";
 	}
 	
+public String modifyCust(){
+		
 	
+		
+		custMapper.updateByPrimaryKey(currentCust);
+		return "success";
+	}
+
+
+private Dvr currentDvr;
+public Dvr getCurrentDvr() {
+	return currentDvr;
+}
+
+public void setCurrentDvr(Dvr currentDvr) {
+	this.currentDvr = currentDvr;
+}
+
+public String modifyDvr(){
+	
+	
+	
+	dvrMapper.updateByPrimaryKey(currentDvr);
+	return "success";
+}
 	
 	 public String getOwner() {
 		return owner;

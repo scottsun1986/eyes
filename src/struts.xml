@@ -28,6 +28,16 @@
 		<action name="gotoDvrDetailPage" class="action.ManageAction" method="gotoDvrDetailPage">
  <result name="success">dvrDetail.jsp</result>
 		</action>
+		<action name="gotoCustDetailPage" class="action.ManageAction" method="gotoCustDetailPage">
+ <result name="success">custDetail.jsp</result>
+		</action>
+		<action name="gotoCustModifyPage" class="action.ManageAction" method="gotoCustModifyPage">
+ <result name="success">custModify.jsp</result>
+		</action>
+		
+		<action name="gotoDvrModifyPage" class="action.ManageAction" method="gotoDvrModifyPage">
+ <result name="success">dvrModify.jsp</result>
+		</action>
 		
 		<action name="goToAddNewDvrPage" class="action.ManageAction" method="goToAddNewDvr">
  <result name="success">addDvr.jsp</result>
@@ -56,7 +66,12 @@
 	    <action name="addNewCust" class="action.ManageAction" method="addNewCust">
              <result name="success">addCustSuccess.jsp</result>
 		</action>
-		
+		  <action name="modifyCust" class="action.ManageAction" method="modifyCust">
+             <result name="success">modifyCustSuccess.jsp</result>
+		</action>
+			  <action name="modifyDvr" class="action.ManageAction" method="modifyDvr">
+             <result name="success">modifyDvrSuccess.jsp</result>
+		</action>
 		<!-- <action name="logout" class="action.LoginAction" method="out"> </action> 
 			<action name="switchMenu" class="action.SwitchMenuAction" method="change"></action> -->
 

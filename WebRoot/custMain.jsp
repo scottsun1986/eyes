@@ -162,7 +162,7 @@ function goToPage(page){
 					<td><%=currentCust.getContactPhone()%></td>
 					<td><%=currentCust.getAddress()%></td>
 					
-					<td> </td>
+					<td><button class="button button-little " onclick="window.open('gotoCustDetailPage.action?id=<%=currentCust.getId()%>')">详情</button><button class="button button-little" onclick="window.open('gotoCustModifyPage.action?id=<%=currentCust.getId()%>')">修改</button><button class="button button-little">删除</button></td>
 				</tr>
 				<%
 					}
