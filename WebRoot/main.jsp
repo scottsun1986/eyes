@@ -180,7 +180,9 @@ function goToPage(page){
 					<td><%=currentDvr.getPuid()%></td>
 					<td><%=currentDvr.getBandNumber()%></td>
 					<td><%=currentDvr.getIp()%></td>
-					<td><button class="button button-little " onclick="window.open('gotoDvrDetailPage.action?id=<%=currentDvr.getId()%>')">详情</button><button class="button button-little" onclick="window.open('gotoDvrModifyPage.action?id=<%=currentDvr.getId()%>')">修改</button><button class="button button-little">删除</button></td>
+					<td><button class="button button-little " onclick="window.open('gotoDvrDetailPage.action?id=<%=currentDvr.getId()%>')">详情</button>
+					<button class="button button-little" onclick="window.open('gotoDvrModifyPage.action?id=<%=currentDvr.getId()%>')">修改</button>
+					<button class="button button-little" onclick="window.open('gotoDvrDeletePage.action?id=<%=currentDvr.getId()%>')">删除</button></td>
 				</tr>
 				<%
 					}

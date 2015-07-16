@@ -20,60 +20,110 @@
 
 		</action>
 		<action name="goMainPage" class="action.ManageAction" method="goMainPage">
- <result name="success">main.jsp</result>
+			<result name="success">main.jsp</result>
 		</action>
-		<action name="goCustMainPage" class="action.ManageAction" method="goCustMainPage">
- <result name="success">custMain.jsp</result>
+		<action name="goCustMainPage" class="action.ManageAction"
+			method="goCustMainPage">
+			<result name="success">custMain.jsp</result>
 		</action>
-		<action name="gotoDvrDetailPage" class="action.ManageAction" method="gotoDvrDetailPage">
- <result name="success">dvrDetail.jsp</result>
+		<action name="gotoDvrDetailPage" class="action.ManageAction"
+			method="gotoDvrDetailPage">
+			<result name="success">dvrDetail.jsp</result>
 		</action>
-		<action name="gotoCustDetailPage" class="action.ManageAction" method="gotoCustDetailPage">
- <result name="success">custDetail.jsp</result>
+		<action name="gotoCustDetailPage" class="action.ManageAction"
+			method="gotoCustDetailPage">
+			<result name="success">custDetail.jsp</result>
 		</action>
-		<action name="gotoCustModifyPage" class="action.ManageAction" method="gotoCustModifyPage">
- <result name="success">custModify.jsp</result>
+		<action name="gotoCustModifyPage" class="action.ManageAction"
+			method="gotoCustModifyPage">
+			<result name="success">custModify.jsp</result>
 		</action>
-		
-		<action name="gotoDvrModifyPage" class="action.ManageAction" method="gotoDvrModifyPage">
- <result name="success">dvrModify.jsp</result>
+
+		<action name="gotoDvrModifyPage" class="action.ManageAction"
+			method="gotoDvrModifyPage">
+			<result name="success">dvrModify.jsp</result>
 		</action>
-		
-		<action name="goToAddNewDvrPage" class="action.ManageAction" method="goToAddNewDvr">
- <result name="success">addDvr.jsp</result>
+
+		<action name="goToAddNewDvrPage" class="action.ManageAction"
+			method="goToAddNewDvr">
+			<result name="success">addDvr.jsp</result>
 		</action>
-		<action name="gotoAddNewCust" class="action.ManageAction" method="gotoAddNewCust">
-	 <result name="success">addCust.jsp</result>
+		<action name="gotoAddNewCust" class="action.ManageAction"
+			method="gotoAddNewCust">
+			<result name="success">addCust.jsp</result>
 		</action>
-		<action name="searchByAll" class="action.ManageAction"  method="searchByAll">
-		    <result name="success">main.jsp</result>
+		<action name="searchByAll" class="action.ManageAction" method="searchByAll">
+			<result name="success">main.jsp</result>
 		</action>
-		
-		<action name="custSearchByAll" class="action.ManageAction"  method="custSearchByAll">
-		    <result name="success">custMain.jsp</result>
+
+		<action name="custSearchByAll" class="action.ManageAction"
+			method="custSearchByAll">
+			<result name="success">custMain.jsp</result>
 		</action>
-		
-		<action name="findCustsList" class="action.ManageAction" method="findCustsList">
-		    
-		   <result type="json">
-		       <param name="root">responseJson</param>
-		   </result>
+
+		<action name="findCustsList" class="action.ManageAction"
+			method="findCustsList">
+
+			<result type="json">
+				<param name="root">responseJson</param>
+			</result>
 		</action>
 		<action name="addNewDvr" class="action.ManageAction" method="addNewDvr">
- <result name="success">addDvrSuccess.jsp</result>
+			<result name="success">addDvrSuccess.jsp</result>
 		</action>
-		
-	    <action name="addNewCust" class="action.ManageAction" method="addNewCust">
-             <result name="success">addCustSuccess.jsp</result>
+
+		<action name="addNewCust" class="action.ManageAction" method="addNewCust">
+			<result name="success">addCustSuccess.jsp</result>
 		</action>
-		  <action name="modifyCust" class="action.ManageAction" method="modifyCust">
-             <result name="success">modifyCustSuccess.jsp</result>
+		<action name="modifyCust" class="action.ManageAction" method="modifyCust">
+			<result name="success">modifyCustSuccess.jsp</result>
 		</action>
-			  <action name="modifyDvr" class="action.ManageAction" method="modifyDvr">
-             <result name="success">modifyDvrSuccess.jsp</result>
+		<action name="modifyDvr" class="action.ManageAction" method="modifyDvr">
+			<result name="success">modifyDvrSuccess.jsp</result>
 		</action>
 		<!-- <action name="logout" class="action.LoginAction" method="out"> </action> 
 			<action name="switchMenu" class="action.SwitchMenuAction" method="change"></action> -->
+
+		<action name="gotoCustDeletePage" class="action.ManageAction"
+			method="gotoCustDeletePage">
+			<result name="success">custDelete.jsp</result>
+		</action>
+		<action name="gotoDvrDeletePage" class="action.ManageAction"
+			method="gotoDvrDeletePage">
+			<result name="success">dvrDelete.jsp</result>
+		</action>
+		
+		<action name="custDelete" class="action.ManageAction"
+			method="custDelete">
+			<result name="success">custDeleteSuccessful.jsp</result>
+			<result name="failed">custDeleteFailed.jsp</result>
+		</action>
+		<action name="dvrDelete" class="action.ManageAction"
+			method="dvrDelete">
+			<result name="success">dvrDeleteSuccessful.jsp</result>
+			<result name="failed">dvrDeleteFailed.jsp</result>
+		</action>
+	</package>
+
+
+	<package name="loginRequest" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="authorityInterceptor" class="util.AuthorityInterceptor"></interceptor>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authorityInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+
+		</interceptors>
+		<default-interceptor-ref name="secureStack"></default-interceptor-ref>
+		<global-results>
+			<result name="index">/index.jsp</result>
+			<result name="login">/login.jsp</result>
+			<result name="showMsg">/showMsg.jsp</result>
+		</global-results>
+
+
 
 	</package>
 

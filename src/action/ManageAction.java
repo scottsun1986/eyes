@@ -1,7 +1,6 @@
 package action;
 
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +13,13 @@ import mybatis.model.Dvr;
 
 import org.apache.struts2.ServletActionContext;
 
+import util.ShowMsg;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ManageAction extends ActionSupport{
+public class ManageAction extends ActionSupport {
 	private CustMapper custMapper;
 	private Map responseJson;
 
@@ -29,66 +30,87 @@ public class ManageAction extends ActionSupport{
 	public void setResponseJson(Map responseJson) {
 		this.responseJson = responseJson;
 	}
+
 	private String custsKey;
+
 	public String getCustsKey() {
 		return custsKey;
 	}
+
 	public void setCustsKey(String custsKey) {
 		this.custsKey = custsKey;
 	}
+
 	public CustMapper getCustMapper() {
 		return custMapper;
 	}
+
 	public void setCustMapper(CustMapper custMapper) {
 		this.custMapper = custMapper;
 	}
+
 	public String getSearchKey() {
 		return searchKey;
 	}
+
 	public void setSearchKey(String searchKey) {
 		this.searchKey = searchKey;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public String getZone() {
 		return zone;
 	}
+
 	public void setZone(String zone) {
 		this.zone = zone;
 	}
+
 	public String getPlatformType() {
 		return platformType;
 	}
+
 	public void setPlatformType(String platformType) {
 		this.platformType = platformType;
 	}
+
 	public String getPuid() {
 		return puid;
 	}
+
 	public void setPuid(String puid) {
 		this.puid = puid;
 	}
+
 	public String getBandNumber() {
 		return bandNumber;
 	}
+
 	public void setBandNumber(String bandNumber) {
 		this.bandNumber = bandNumber;
 	}
+
 	public DvrMapper getDvrMapper() {
 		return dvrMapper;
 	}
+
 	public void setDvrMapper(DvrMapper dvrMapper) {
 		this.dvrMapper = dvrMapper;
 	}
+
 	private String searchKey;
 	private String status;
 	private String zone;
 	private String platformType;
 	private String puid;
+
 	public String getCustId() {
 		return custId;
 	}
@@ -224,6 +246,7 @@ public class ManageAction extends ActionSupport{
 	public void setPropertyRight(String propertyRight) {
 		this.propertyRight = propertyRight;
 	}
+
 	private String custId;
 	private String puName;
 	private String platformAccount;
@@ -243,15 +266,19 @@ public class ManageAction extends ActionSupport{
 	private String propertyRight;
 	private String bandNumber;
 	private String type;
-		public String getType() {
+
+	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
-		private DvrMapper dvrMapper;
+
+	private DvrMapper dvrMapper;
 	private Integer currentPage;
 	private Integer custCurrentPage;
+
 	public Integer getCustCurrentPage() {
 		return custCurrentPage;
 	}
@@ -267,51 +294,54 @@ public class ManageAction extends ActionSupport{
 	public void setCurrentPage(Integer currentPage) {
 		this.currentPage = currentPage;
 	}
-	public String searchByAll(){
+
+	public String searchByAll() {
 		Map session = ServletActionContext.getContext().getSession();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		if (currentPage == null)
 			PageHelper.startPage(1, 20);
 		else
 			PageHelper.startPage(currentPage, 20);
-	
-		List<Dvr> dvrs=dvrMapper.selectByAll(searchKey, zone, status, platformType, puid, bandNumber,type);
-	 
+
+		List<Dvr> dvrs = dvrMapper.selectByAll(searchKey, zone, status,
+				platformType, puid, bandNumber, type);
+
 		request.setAttribute("currentDvrs", dvrs);
-	//	if(searchKey!=null)
-		//request.setAttribute("searchKey", searchKey);
+		// if(searchKey!=null)
+		// request.setAttribute("searchKey", searchKey);
 		PageInfo pi = new PageInfo(dvrs);
 		session.put("pageInfo", pi);
 		ServletActionContext.setRequest(ServletActionContext.getRequest());
 		return "success";
-		
-		 
+
 	}
-	public String custSearchByAll(){
+
+	public String custSearchByAll() {
 		Map session = ServletActionContext.getContext().getSession();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		if (custCurrentPage == null)
 			PageHelper.startPage(1, 20);
 		else
 			PageHelper.startPage(custCurrentPage, 20);
-	
-		List<Cust> custs=custMapper.custSelectByAll(type, status, owner, name, searchKey);
+
+		List<Cust> custs = custMapper.custSelectByAll(type, status, owner,
+				name, searchKey);
 		request.setAttribute("currentCusts", custs);
-	//	if(searchKey!=null)
-		//request.setAttribute("searchKey", searchKey);
+		// if(searchKey!=null)
+		// request.setAttribute("searchKey", searchKey);
 		PageInfo pi = new PageInfo(custs);
 		session.put("pageInfo", pi);
 		ServletActionContext.setRequest(ServletActionContext.getRequest());
 		return "success";
-		
-		 
+
 	}
-	public String goToAddNewDvr(){
+
+	public String goToAddNewDvr() {
 		return "success";
 	}
-	
+
 	private String id;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -320,38 +350,76 @@ public class ManageAction extends ActionSupport{
 		this.id = id;
 	}
 
-	public String gotoDvrDetailPage(){
-		if(id!=null&&!id.trim().equals("")){
-		Dvr currentDvr=dvrMapper.selectAllByPrimaryKey(new Integer(id));
-	 
-		HttpServletRequest request = ServletActionContext.getRequest();
-	 
-		request.setAttribute("currentDvr", currentDvr);
-	//	if(searchKey!=null)
-		//request.setAttribute("searchKey", searchKey);
-	 
-		ServletActionContext.setRequest(ServletActionContext.getRequest());
-	 
-		return "success";}
+	public String gotoDvrDetailPage() {
+		if (id != null && !id.trim().equals("")) {
+			Dvr currentDvr = dvrMapper.selectAllByPrimaryKey(new Integer(id));
+
+			HttpServletRequest request = ServletActionContext.getRequest();
+
+			request.setAttribute("currentDvr", currentDvr);
+			// if(searchKey!=null)
+			// request.setAttribute("searchKey", searchKey);
+
+			ServletActionContext.setRequest(ServletActionContext.getRequest());
+
+			return "success";
+		}
 		return "";
 	}
-	
-	public String gotoCustDetailPage(){
-		if(id!=null&&!id.trim().equals("")){
-		Cust currentCust=custMapper.selectByPrimaryKey(new Integer(id));
-	 
-		HttpServletRequest request = ServletActionContext.getRequest();
-	 
-		request.setAttribute("currentCust", currentCust);
-	//	if(searchKey!=null)
-		//request.setAttribute("searchKey", searchKey);
-	 
-		ServletActionContext.setRequest(ServletActionContext.getRequest());
-	 
-		return "success";}
+
+	public String gotoDvrDeletePage() {
+		if (id != null && !id.trim().equals("")) {
+			Dvr currentDvr = dvrMapper.selectAllByPrimaryKey(new Integer(id));
+
+			HttpServletRequest request = ServletActionContext.getRequest();
+
+			request.setAttribute("currentDvr", currentDvr);
+			// if(searchKey!=null)
+			// request.setAttribute("searchKey", searchKey);
+
+			ServletActionContext.setRequest(ServletActionContext.getRequest());
+
+			return "success";
+		}
 		return "";
 	}
+
+	public String gotoCustDetailPage() {
+		if (id != null && !id.trim().equals("")) {
+			Cust currentCust = custMapper.selectByPrimaryKey(new Integer(id));
+
+			HttpServletRequest request = ServletActionContext.getRequest();
+
+			request.setAttribute("currentCust", currentCust);
+			// if(searchKey!=null)
+			// request.setAttribute("searchKey", searchKey);
+
+			ServletActionContext.setRequest(ServletActionContext.getRequest());
+
+			return "success";
+		}
+		return "";
+	}
+
+	public String gotoCustDeletePage() {
+		if (id != null && !id.trim().equals("")) {
+			Cust currentCust = custMapper.selectByPrimaryKey(new Integer(id));
+
+			HttpServletRequest request = ServletActionContext.getRequest();
+
+			request.setAttribute("currentCust", currentCust);
+			// if(searchKey!=null)
+			// request.setAttribute("searchKey", searchKey);
+
+			ServletActionContext.setRequest(ServletActionContext.getRequest());
+
+			return "success";
+		}
+		return "";
+	}
+
 	private Cust currentCust;
+
 	public Cust getCurrentCust() {
 		return currentCust;
 	}
@@ -360,58 +428,111 @@ public class ManageAction extends ActionSupport{
 		this.currentCust = currentCust;
 	}
 
-	public String gotoCustModifyPage(){
-		if(id!=null&&!id.trim().equals("")){
-		currentCust=custMapper.selectByPrimaryKey(new Integer(id));
-	 
-		HttpServletRequest request = ServletActionContext.getRequest();
-	 
-		request.setAttribute("currentCust", currentCust);
-	//	if(searchKey!=null)
-		//request.setAttribute("searchKey", searchKey);
-	 
-		ServletActionContext.setRequest(ServletActionContext.getRequest());
-	 
-		return "success";}
+	public String gotoCustModifyPage() {
+		if (id != null && !id.trim().equals("")) {
+			currentCust = custMapper.selectByPrimaryKey(new Integer(id));
+
+			HttpServletRequest request = ServletActionContext.getRequest();
+
+			request.setAttribute("currentCust", currentCust);
+			// if(searchKey!=null)
+			// request.setAttribute("searchKey", searchKey);
+
+			ServletActionContext.setRequest(ServletActionContext.getRequest());
+
+			return "success";
+		}
 		return "";
 	}
-	public String gotoDvrModifyPage(){
-		if(id!=null&&!id.trim().equals("")){
-		currentDvr=dvrMapper.selectAllByPrimaryKey(new Integer(id));
- 		HttpServletRequest request = ServletActionContext.getRequest();
+
+	public String custDelete() {
+		if (id != null && !id.trim().equals("")) {
+			int ok = custMapper.deleteByPrimaryKey(new Integer(id));
+
+			if (ok == 1){
+				ServletActionContext.getRequest().setAttribute("showMsg",
+						new ShowMsg("通知", "已经删除成功！", 0));
+				return "showMsg";
+			}
+ 
+			else{
+				ServletActionContext.getRequest().setAttribute("showMsg",
+						new ShowMsg("通知", "删除失敗！", 0));
+				return "showMsg";
+			}
+				 
+		}
+		 
+			ServletActionContext.getRequest().setAttribute("showMsg",
+					new ShowMsg("通知", "內部錯誤！", 0));
+			return "showMsg";
+		 
+
+	}
 	
-		request.setAttribute("currentDvr", currentDvr);
-	//	if(searchKey!=null)
-		//request.setAttribute("searchKey", searchKey);
-	 
-		ServletActionContext.setRequest(ServletActionContext.getRequest());
-	 
-		return "success";}
+	public String dvrDelete() {
+		if (id != null && !id.trim().equals("")) {
+			int ok = dvrMapper.deleteByPrimaryKey(new Integer(id));
+
+			if (ok == 1){
+				ServletActionContext.getRequest().setAttribute("showMsg",
+						new ShowMsg("通知", "已经删除成功！", 0));
+				return "showMsg";
+			}
+ 
+			else{
+				ServletActionContext.getRequest().setAttribute("showMsg",
+						new ShowMsg("通知", "删除失敗！", 0));
+				return "showMsg";
+			}
+				 
+		}
+		 
+			ServletActionContext.getRequest().setAttribute("showMsg",
+					new ShowMsg("通知", "內部錯誤！", 0));
+			return "showMsg";
+
+	}
+
+	public String gotoDvrModifyPage() {
+		if (id != null && !id.trim().equals("")) {
+			currentDvr = dvrMapper.selectAllByPrimaryKey(new Integer(id));
+			HttpServletRequest request = ServletActionContext.getRequest();
+
+			request.setAttribute("currentDvr", currentDvr);
+			// if(searchKey!=null)
+			// request.setAttribute("searchKey", searchKey);
+
+			ServletActionContext.setRequest(ServletActionContext.getRequest());
+
+			return "success";
+		}
 		return "";
 	}
-	
-	public String goCustMainPage(){
+
+	public String goCustMainPage() {
 		return "success";
 	}
-	public String goMainPage(){
+
+	public String goMainPage() {
 		return "success";
 	}
-	
-	public String gotoAddNewCust(){
+
+	public String gotoAddNewCust() {
 		return "success";
 	}
-	public String findCustsList(){
+
+	public String findCustsList() {
 		List<Cust> custList = custMapper.selectByKey(custsKey);
 		Map returned = new HashMap();
 		returned.put("custList", custList);
 		this.setResponseJson(returned);
 		return SUCCESS;
 	}
-	
-	
-	public String addNewDvr(){
-		System.out.println(custId+":"+cameraNum);
-		Dvr d=new Dvr();
+
+	public String addNewDvr() {
+		System.out.println(custId + ":" + cameraNum);
+		Dvr d = new Dvr();
 		d.setBandDevice(bandDevice);
 		d.setBandMode(bandMode);
 		d.setBandNumber(bandNumber);
@@ -419,8 +540,8 @@ public class ManageAction extends ActionSupport{
 		d.setBandSpeed(bandSpeed);
 		d.setCameraDesc(cameraDesc);
 		d.setCameraDvrLength(cameraDvrLength);
-		if(cameraNum!=null&&!cameraNum.trim().equals(""))
-		d.setCameraNum(new Integer(cameraNum));
+		if (cameraNum != null && !cameraNum.trim().equals(""))
+			d.setCameraNum(new Integer(cameraNum));
 		d.setCameraType(cameraType);
 		d.setCustId(new Integer(custId));
 		d.setDiskSize(diskSize);
@@ -433,16 +554,17 @@ public class ManageAction extends ActionSupport{
 		d.setPropertyRight(propertyRight);
 		d.setPuid(puid);
 		d.setPuName(puName);
-		
+
 		dvrMapper.insert(d);
-		return "success";
+
+		ServletActionContext.getRequest().setAttribute("showMsg",
+				new ShowMsg("通知", "添加成功！", 0));
+		return "showMsg";
 	}
-	
-	
-	
-	public String addNewCust(){
-		
-		Cust d=new Cust();
+
+	public String addNewCust() {
+
+		Cust d = new Cust();
 		d.setAddress(address);
 		d.setContact(contact);
 		d.setContactPhone(contactPhone);
@@ -453,38 +575,46 @@ public class ManageAction extends ActionSupport{
 		d.setStatus(status);
 		d.setType(type);
 		d.setZone(zone);
-		
+
 		custMapper.insert(d);
-		return "success";
+		
+	 
+			ServletActionContext.getRequest().setAttribute("showMsg",
+					new ShowMsg("通知", "添加成功！", 0));
+			return "showMsg";
+	 
+	  
 	}
-	
-public String modifyCust(){
-		
-	
-		
+
+	public String modifyCust() {
+
 		custMapper.updateByPrimaryKey(currentCust);
-		return "success";
+
+		ServletActionContext.getRequest().setAttribute("showMsg",
+				new ShowMsg("通知", "修改成功！", 0));
+		return "showMsg";
 	}
 
+	private Dvr currentDvr;
 
-private Dvr currentDvr;
-public Dvr getCurrentDvr() {
-	return currentDvr;
-}
+	public Dvr getCurrentDvr() {
+		return currentDvr;
+	}
 
-public void setCurrentDvr(Dvr currentDvr) {
-	this.currentDvr = currentDvr;
-}
+	public void setCurrentDvr(Dvr currentDvr) {
+		this.currentDvr = currentDvr;
+	}
 
-public String modifyDvr(){
-	
-	
-	
-	dvrMapper.updateByPrimaryKey(currentDvr);
-	return "success";
-}
-	
-	 public String getOwner() {
+	public String modifyDvr() {
+
+		dvrMapper.updateByPrimaryKey(currentDvr);
+
+		ServletActionContext.getRequest().setAttribute("showMsg",
+				new ShowMsg("通知", "修改成功！", 0));
+		return "showMsg";
+	}
+
+	public String getOwner() {
 		return owner;
 	}
 
@@ -539,24 +669,19 @@ public String modifyDvr(){
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	private String owner;
- 
-	    private String name;
- 
-	    private String contact;
- 
-	    private String contactPhone;
 
-	 
-	    private String custMgr;
+	private String name;
 
-	   
-	    private String custMgrPhone;
+	private String contact;
 
-	 
-	  
-	 
- 
-	    private String address;
-  
+	private String contactPhone;
+
+	private String custMgr;
+
+	private String custMgrPhone;
+
+	private String address;
+
 }
