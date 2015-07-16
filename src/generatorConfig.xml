@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+
+<classPathEntry  location="C:\Program Files (x86)\Java\custjar\mysql-connector-java-5.1.7-bin.jar"/> 
+  <context id="context1" >
+  <property name="mergeable" value="true"></property>
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://fun4g.com:3306/eyes" userId="vip" password="123456" />
+    <javaModelGenerator targetPackage="mybatis.model" targetProject="eyes" />
+    <sqlMapGenerator targetPackage="mybatis.mapping" targetProject="eyes" />
+    <javaClientGenerator targetPackage="mybatis.dao" targetProject="eyes" type="XMLMAPPER" />
+ 
+    <table tableName="cust"></table>
+    <table tableName="check"></table> 
+     <table tableName="dvr"></table>
+      <table tableName="check_user_rela"></table>
+       <table tableName="user"></table>
+     
+  </context>
+</generatorConfiguration>

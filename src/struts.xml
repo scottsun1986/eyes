@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple" />
+	<package name="alluser" extends="struts-default,json-default">
+
+
+		<global-results>
+			<result name="index">/index.jsp</result>
+			<result name="main">/main.jsp</result>
+			<result name="showMsg">/showMsg.jsp</result>
+		</global-results>
+
+
+
+
+
+
+		<action name="pcLogin" class="action.LoginAction" method="pcLogin">
+
+		</action>
+		<action name="goMainPage" class="action.ManageAction" method="goMainPage">
+ <result name="success">main.jsp</result>
+		</action>
+		<action name="goCustMainPage" class="action.ManageAction" method="goCustMainPage">
+ <result name="success">custMain.jsp</result>
+		</action>
+		<action name="gotoDvrDetailPage" class="action.ManageAction" method="gotoDvrDetailPage">
+ <result name="success">dvrDetail.jsp</result>
+		</action>
+		
+		<action name="goToAddNewDvrPage" class="action.ManageAction" method="goToAddNewDvr">
+ <result name="success">addDvr.jsp</result>
+		</action>
+		<action name="gotoAddNewCust" class="action.ManageAction" method="gotoAddNewCust">
+	 <result name="success">addCust.jsp</result>
+		</action>
+		<action name="searchByAll" class="action.ManageAction"  method="searchByAll">
+		    <result name="success">main.jsp</result>
+		</action>
+		
+		<action name="custSearchByAll" class="action.ManageAction"  method="custSearchByAll">
+		    <result name="success">custMain.jsp</result>
+		</action>
+		
+		<action name="findCustsList" class="action.ManageAction" method="findCustsList">
+		    
+		   <result type="json">
+		       <param name="root">responseJson</param>
+		   </result>
+		</action>
+		<action name="addNewDvr" class="action.ManageAction" method="addNewDvr">
+ <result name="success">addDvrSuccess.jsp</result>
+		</action>
+		
+	    <action name="addNewCust" class="action.ManageAction" method="addNewCust">
+             <result name="success">addCustSuccess.jsp</result>
+		</action>
+		
+		<!-- <action name="logout" class="action.LoginAction" method="out"> </action> 
+			<action name="switchMenu" class="action.SwitchMenuAction" method="change"></action> -->
+
+	</package>
+
+</struts>    
