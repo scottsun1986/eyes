@@ -94,7 +94,7 @@ if(currentCust!=null){
 			</table>
 			<p class="bg-yellow">重要提醒：删除接入点后，接入点下的所有DVR均会被自动删除！</p>
 		 
-			<button class="button" onclick="window.open('custDelete.action?id=<%=currentCust.getId()%>')" >确认删除</button><button class="button" onclick="closewindow()" >取消</button>
+			<button class="button" onclick="window.location='custDelete.action?id=<%=currentCust.getId()%>'" >确认删除</button><button class="button" onclick="closewindow()" >取消</button>
 		
 		</div>
 <%} %>

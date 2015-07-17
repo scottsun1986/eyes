@@ -74,7 +74,7 @@
     <result column="lat" jdbcType="DOUBLE" property="lat" />
     <result column="lng" jdbcType="DOUBLE" property="lng" />
     <result column="address" jdbcType="VARCHAR" property="address" />
-
+     <result column="type" jdbcType="VARCHAR" property="type" />
 		</association>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -606,7 +606,7 @@
 
 	<select id="selectAllByPrimaryKey" parameterType="java.lang.Integer" resultMap="DetailedResultMap">
 		select
-		a.contact,a.contact_phone,a.address,a.cust_mgr,a.cust_mgr_phone,a.lat,a.lng,a.`name`,a.`owner`,a.`status`,a.zone,b.* 
+		a.contact,a.contact_phone,a.address,a.cust_mgr,a.cust_mgr_phone,a.lat,a.lng,a.`name`,a.`owner`,a.`status`,a.zone,a.type,b.* 
 		from cust a,dvr b
 		<where>
 			a.id=b.cust_id
@@ -618,7 +618,7 @@
 	</select>
 	<select id="selectByAll" resultMap="DetailedResultMap">
 		select
-		a.contact,a.contact_phone,a.address,a.cust_mgr,a.cust_mgr_phone,a.lat,a.lng,a.`name`,a.`owner`,a.`status`,a.zone,b.* 
+		a.contact,a.contact_phone,a.address,a.cust_mgr,a.cust_mgr_phone,a.lat,a.lng,a.`name`,a.`owner`,a.`status`,a.zone,a.type,b.* 
 		from cust a,dvr b
 		<where>
 			a.id=b.cust_id

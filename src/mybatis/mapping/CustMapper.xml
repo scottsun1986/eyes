@@ -447,7 +447,7 @@
 				and name = #{name}
 			</if>
 			<if test="owner != null  and owner != ''">
-				and owner = #{owner}
+				and owner  like CONCAT('%',#{owner},'%') 
 			</if>
 			<if test="searchKey != null">
    and ( contact   like CONCAT('%',#{searchKey},'%') or contact_phone  like CONCAT('%',#{searchKey},'%')

@@ -21,8 +21,8 @@ public class BeanGetter {
 
 	public static void main(String[] args) throws FileNotFoundException, SQLException {
 	
-		CustMapper cm=(CustMapper)BeanGetter.getBean("custMapper");
-		System.out.println(cm.selectByKey("营业厅").size());
+		DvrMapper cm=(DvrMapper)BeanGetter.getBean("dvrMapper");
+		System.out.println(cm.selectAllByPrimaryKey(4).getCust().getType());
 
 	//	GridbuildingMapper fm=(GridbuildingMapper)BeanGetter.getBean("gridbuildingMapper");
 		//System.out.println(((Gridbuilding)fm.selectAll()).getUdepartment());

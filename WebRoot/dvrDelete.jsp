@@ -183,7 +183,7 @@ Cust currentCust=currentDvr.getCust();
 				</tr>
 				
 			</table>
-			<button class="button" onclick="window.open('dvrDelete.action?id=<%=currentDvr.getId()%>')" >确认删除</button>
+			<button class="button" onclick="window.location='dvrDelete.action?id=<%=currentDvr.getId()%>'" >确认删除</button>
 			<button class="button" onclick="closewindow()" >取消</button>
 		</div>
 <%} %>
